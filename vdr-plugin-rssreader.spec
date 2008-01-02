@@ -12,6 +12,7 @@ Group:		Video
 License:	GPL
 URL:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/
 Source:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/files/vdr-%plugin-%version.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	vdr-devel >= 1.4.1-6
 BuildRequires:	expat-devel
 BuildRequires:	curl-devel
