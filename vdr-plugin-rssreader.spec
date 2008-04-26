@@ -1,8 +1,8 @@
 
 %define plugin	rssreader
 %define name	vdr-plugin-%plugin
-%define version	1.0.1
-%define rel	12
+%define version	1.6.0
+%define rel	1
 
 Summary:	VDR plugin: RSS Reader for OSD
 Name:		%name
@@ -11,9 +11,9 @@ Release:	%mkrel %rel
 Group:		Video
 License:	GPL
 URL:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/
-Source:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/files/vdr-%plugin-%version.tar.bz2
+Source:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/files/vdr-%plugin-%version.tgz
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	vdr-devel >= 1.4.1-6
+BuildRequires:	vdr-devel >= 1.6.0
 BuildRequires:	expat-devel
 BuildRequires:	curl-devel
 Requires:	vdr-abi = %vdr_abi
@@ -24,6 +24,7 @@ for reading user-defined RSS streams.
 
 %prep
 %setup -q -n %plugin-%version
+%vdr_plugin_prep
 
 %build
 %vdr_plugin_build
