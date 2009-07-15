@@ -1,15 +1,15 @@
 
 %define plugin	rssreader
 %define name	vdr-plugin-%plugin
-%define version	1.6.0
-%define rel	3
+%define version	1.6.4
+%define rel	1
 
 Summary:	VDR plugin: RSS Reader for OSD
 Name:		%name
 Version:	%version
 Release:	%mkrel %rel
 Group:		Video
-License:	GPL
+License:	GPLv2+
 URL:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/
 Source:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/files/vdr-%plugin-%version.tgz
 BuildRoot:	%{_tmppath}/%{name}-buildroot
@@ -33,12 +33,18 @@ for reading user-defined RSS streams.
 rm -rf %{buildroot}
 %vdr_plugin_install
 
-install -D -m644 example/rssreader.conf %{buildroot}%{_vdr_plugin_cfgdir}/rssreader.conf
+install -D -m644 rssreader/rssreader.conf %{buildroot}%{_vdr_plugin_cfgdir}/%plugin/rssreader.conf
 
 %clean
 rm -rf %{buildroot}
 
 %post
+# Move config file when migrating from 1.6.0
+if [ -e %{_vdr_plugin_cfgdir}/rssreader.conf ] && [ "$1" = "2" ] && 
+	/bin/rpm -V --nodeps --noscript -f %{_vdr_plugin_cfgdir}/rssreader.conf | grep -q '^..5.*%{_vdr_plugin_cfgdir}/rssreader.conf'; then
+	mv -v %{_vdr_plugin_cfgdir}/%plugin/rssreader.conf %{_vdr_plugin_cfgdir}/%plugin/rssreader.conf.rpmnew
+	mv -v %{_vdr_plugin_cfgdir}/rssreader.conf %{_vdr_plugin_cfgdir}/%plugin/rssreader.conf
+fi
 %vdr_plugin_post %plugin
 
 %postun
@@ -47,6 +53,7 @@ rm -rf %{buildroot}
 %files -f %plugin.vdr
 %defattr(-,root,root)
 %doc README HISTORY
-%config(noreplace) %{_vdr_plugin_cfgdir}/rssreader.conf
+%dir %{_vdr_plugin_cfgdir}/%plugin
+%config(noreplace) %{_vdr_plugin_cfgdir}/%plugin/rssreader.conf
 
 
