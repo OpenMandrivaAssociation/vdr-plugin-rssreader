@@ -2,7 +2,7 @@
 %define plugin	rssreader
 %define name	vdr-plugin-%plugin
 %define version	1.6.4
-%define rel	1
+%define rel	2
 
 Summary:	VDR plugin: RSS Reader for OSD
 Name:		%name
