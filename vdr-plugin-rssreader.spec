@@ -10,7 +10,7 @@ Version:	%version
 Release:	%mkrel %rel
 Group:		Video
 License:	GPLv2+
-URL:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/
+URL:		https://www.saunalahti.fi/~rahrenbe/vdr/rssreader/
 Source:		http://www.saunalahti.fi/~rahrenbe/vdr/rssreader/files/vdr-%plugin-%version.tgz
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	vdr-devel >= 1.6.0
